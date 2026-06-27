@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="logo-elo.svg" alt="ELO Hub Logo" width="300"/>
-</p>
-
 <h1 align="center">ELO - Hub de Inteligência Urbana</h1>
 
 <p align="center">
