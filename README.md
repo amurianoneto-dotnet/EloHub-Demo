@@ -5,13 +5,16 @@
   <em>Projeto destaque idealizado para o ecossistema de Smart Cities (Cidades Inteligentes), com piloto projetado para a região de Barra Bonita (Caminhos do Tietê) e validação no programa Empreenda Senac.</em>
 </p>
 
+<p align="center">
+  <b>Status do Projeto:</b> Em contínuo desenvolvimento. (Plataforma Web/MVP concluída (faltam apenas pequenas atualizações) | App Mobile em fase de planejamento). 🚧
+</p>
 ---
 
 ## Visão Geral
 
 O **ELO Hub** é um sistema integrado (SaaS) B2G e B2B que revoluciona a zeladoria urbana e a causa animal. A plataforma elimina a fragmentação da gestão pública, permitindo que a prefeitura, o comércio local e o cidadão atuem juntos em um ecossistema sustentável movido a dados e recompensas.
 
-O projeto é composto por uma **Plataforma Web de Gestão (Dashboard)** e um **Aplicativo Mobile (Cidadão)**, garantindo acessibilidade e dados geolocalizados em tempo real.
+**Evolução da Plataforma:** O projeto é vivo e encontra-se em constante atualização. Atualmente, o núcleo funcional da **Plataforma Web de Gestão (Dashboard e Web App)** já foi estruturado. O **Aplicativo Mobile Nativo**, focado exclusivamente na experiência do cidadão e integração avançada de geolocalização, é o próximo grande marco no nosso roadmap de desenvolvimento.
 
 ---
 
