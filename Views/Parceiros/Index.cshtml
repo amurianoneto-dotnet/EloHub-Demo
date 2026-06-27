@@ -1,0 +1,239 @@
+﻿@{
+    ViewData["Title"] = "Clube de Recompensas";
+    decimal saldo = ViewBag.SaldoAtual ?? 0.00m;
+}
+
+<div class="container my-5">
+    
+    <div class="card border-0 shadow-lg rounded-4 mb-5 overflow-hidden" data-aos="fade-down">
+        <div class="row g-0 align-items-stretch">
+            <div class="col-md-8 p-5 text-white d-flex flex-column justify-content-center" style="background: linear-gradient(135deg, #198754 0%, #0f5132 100%);">
+                <span class="badge bg-white text-success rounded-pill px-3 py-2 mb-3 align-self-start shadow-sm fw-bold">
+                    <i class="fas fa-gift me-1"></i> Benefícios ELO
+                </span>
+                <h1 class="display-5 fw-bold mb-3">Clube de Recompensas</h1>
+                <p class="lead opacity-75 mb-0">Transforme sua atitude cidadã em benefícios reais. Apoie causas sociais da nossa região ou economize no comércio local parceiro.</p>
+            </div>
+            <div class="col-md-4 bg-dark text-white p-5 d-flex align-items-center justify-content-center position-relative">
+                <div class="text-center z-index-2">
+                    <p class="text-uppercase small fw-bold text-success mb-2" style="letter-spacing: 2px;">Seu Saldo Atual</p>
+                    <h2 class="display-3 fw-black text-white mb-0" style="font-weight: 900;">R$ @saldo.ToString("F2")</h2>
+                </div>
+                <i class="fas fa-wallet position-absolute text-white opacity-10" style="font-size: 8rem; right: -20px; bottom: -20px; z-index: 1;"></i>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success shadow-sm rounded-4 fw-bold mb-5 border-0 border-start border-5 border-success p-4">
+            <i class="fas fa-check-circle me-2 fs-5"></i> @TempData["MensagemSucesso"]
+        </div>
+    }
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger shadow-sm rounded-4 fw-bold mb-5 border-0 border-start border-5 border-danger p-4">
+            <i class="fas fa-times-circle me-2 fs-5"></i> @TempData["MensagemErro"]
+        </div>
+    }
+
+    <div class="d-flex align-items-center mb-4 mt-5">
+        <div class="bg-success rounded-circle p-2 me-3 text-white shadow-sm">
+            <i class="fas fa-store-alt fa-fw fs-4"></i>
+        </div>
+        <h3 class="fw-bold text-dark mb-0">Descontos no Comércio Local</h3>
+    </div>
+    
+    <div class="row g-4 mb-5">
+        <div class="col-md-4" data-aos="fade-up">
+            <div class="card h-100 border-0 shadow-sm rounded-4 card-hover bg-light position-relative">
+                <div class="voucher-cutout"></div>
+                <div class="card-body p-4 d-flex flex-column">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-white rounded-circle p-3 me-3 shadow-sm">
+                            <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-0 lh-sm">Supermercado<br>Central</h5>
+                    </div>
+                    <div class="bg-white p-3 rounded-3 border border-dashed border-success mb-3 text-center">
+                        <h4 class="fw-black text-success mb-0">R$ 10 OFF</h4>
+                    </div>
+                    <p class="small text-muted mb-4 flex-grow-1">Válido para compras acima de R$ 50,00 na loja física. Um voucher por CPF.</p>
+                    
+                    <form asp-action="Resgatar" method="post" class="mt-auto">
+                        <input type="hidden" name="valorCusto" value="10,00" />
+                        <input type="hidden" name="nomeParceiro" value="Supermercado Central" />
+                        <input type="hidden" name="tipoAcao" value="Desconto" />
+                        <button type="submit" class="btn btn-outline-success border-2 w-100 rounded-pill fw-bold transition-hover">
+                            Resgatar (R$ 10,00)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 border-0 shadow-sm rounded-4 card-hover bg-light position-relative">
+                <div class="voucher-cutout"></div>
+                <div class="card-body p-4 d-flex flex-column">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-white rounded-circle p-3 me-3 shadow-sm">
+                            <i class="fas fa-bone fa-2x text-success"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-0 lh-sm">PetShop<br>Cão Feliz</h5>
+                    </div>
+                    <div class="bg-white p-3 rounded-3 border border-dashed border-success mb-3 text-center">
+                        <h4 class="fw-black text-success mb-0">15% OFF</h4>
+                    </div>
+                    <p class="small text-muted mb-4 flex-grow-1">Troque seu saldo por 15% de desconto em banho e tosa. Agendamento prévio necessário.</p>
+                    
+                    <form asp-action="Resgatar" method="post" class="mt-auto">
+                        <input type="hidden" name="valorCusto" value="5,00" />
+                        <input type="hidden" name="nomeParceiro" value="PetShop Cão Feliz" />
+                        <input type="hidden" name="tipoAcao" value="Desconto" />
+                        <button type="submit" class="btn btn-outline-success border-2 w-100 rounded-pill fw-bold transition-hover">
+                            Resgatar (R$ 5,00)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 border-0 shadow-sm rounded-4 card-hover bg-light position-relative">
+                <div class="voucher-cutout"></div>
+                <div class="card-body p-4 d-flex flex-column">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-white rounded-circle p-3 me-3 shadow-sm">
+                            <i class="fas fa-bus fa-2x text-success"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-0 lh-sm">Transporte<br>Municipal</h5>
+                    </div>
+                    <div class="bg-white p-3 rounded-3 border border-dashed border-success mb-3 text-center">
+                        <h4 class="fw-black text-success mb-0">1 Passagem Grátis</h4>
+                    </div>
+                    <p class="small text-muted mb-4 flex-grow-1">Integração direto com a prefeitura: troque seu saldo ambiental por créditos no cartão de ônibus.</p>
+                    
+                    <form asp-action="Resgatar" method="post" class="mt-auto">
+                        <input type="hidden" name="valorCusto" value="3.50" />
+                        <input type="hidden" name="nomeParceiro" value="Transporte Municipal" />
+                        <input type="hidden" name="tipoAcao" value="Desconto" />
+                        <button type="submit" class="btn btn-outline-success border-2 w-100 rounded-pill fw-bold transition-hover">
+                            Resgatar (R$ 3,50)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center mb-4 mt-5">
+        <div class="bg-primary rounded-circle p-2 me-3 text-white shadow-sm">
+            <i class="fas fa-paw fa-fw fs-4"></i>
+        </div>
+        <h3 class="fw-bold text-dark mb-0">Apoie as ONGs de Animais</h3>
+    </div>
+    
+    <div class="row g-4 mb-5">
+        <div class="col-md-4" data-aos="fade-up">
+            <div class="card h-100 border-2 border-primary border-opacity-25 shadow-sm rounded-4 card-hover overflow-hidden">
+                <div class="bg-primary bg-opacity-10 p-4 text-center border-bottom border-primary border-opacity-25">
+                    <i class="fas fa-dog fa-4x text-primary mb-2 mt-2 drop-shadow"></i>
+                </div>
+                <div class="card-body p-4 text-center d-flex flex-column">
+                    <h5 class="fw-bold text-dark">ONG Patinhas Livres</h5>
+                    <p class="small text-muted mb-4 flex-grow-1">Ajude a custear ração e medicamentos para os animais resgatados da rua.</p>
+                    <form asp-action="Resgatar" method="post" class="mt-auto">
+                        <input type="hidden" name="valorCusto" value="0,50" />
+                        <input type="hidden" name="nomeParceiro" value="ONG Patinhas Livres" />
+                        <input type="hidden" name="tipoAcao" value="Doacao" />
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm transition-hover">
+                            Doar R$ 0,50 <i class="fas fa-heart ms-1 text-danger"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 border-2 border-primary border-opacity-25 shadow-sm rounded-4 card-hover overflow-hidden">
+                <div class="bg-primary bg-opacity-10 p-4 text-center border-bottom border-primary border-opacity-25">
+                    <i class="fas fa-cat fa-4x text-primary mb-2 mt-2 drop-shadow"></i>
+                </div>
+                <div class="card-body p-4 text-center d-flex flex-column">
+                    <h5 class="fw-bold text-dark">Abrigo Gato Mia</h5>
+                    <p class="small text-muted mb-4 flex-grow-1">Contribua para o projeto de castração social de felinos em situação de abandono.</p>
+                    <form asp-action="Resgatar" method="post" class="mt-auto">
+                        <input type="hidden" name="valorCusto" value="5,00" />
+                        <input type="hidden" name="nomeParceiro" value="Abrigo Gato Mia" />
+                        <input type="hidden" name="tipoAcao" value="Doacao" />
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm transition-hover">
+                            Doar R$ 5,00 <i class="fas fa-heart ms-1 text-danger"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+        .transition-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        }
+    
+    .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+        }
+
+    .fw-black {
+        font-weight: 900 !important;
+    }
+
+    .drop-shadow {
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+
+    .border-dashed {
+        border-style: dashed !important;
+    }
+
+    /* Efeito de "Recorte" nos cupons de desconto */
+    .voucher-cutout {
+        position: absolute;
+        left: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: #fff; /* Cor do fundo da página para simular o furo */
+        border-radius: 50%;
+        z-index: 10;
+        box-shadow: inset -3px 0 5px rgba(0,0,0,0.05);
+    }
+
+    .card-hover::after {
+        content: '';
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        border-radius: 50%;
+        z-index: 10;
+        box-shadow: inset 3px 0 5px rgba(0,0,0,0.05);
+    }
+</style>

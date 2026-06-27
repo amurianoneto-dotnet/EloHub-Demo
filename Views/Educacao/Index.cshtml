@@ -1,0 +1,92 @@
+﻿@model IEnumerable<EcoCicloPortal.Models.ConteudoEducativo>
+
+@{
+    ViewData["Title"] = "Academia de Cidadania";
+}
+
+<div class="container my-5">
+    <div class="row align-items-center mb-5" data-aos="fade-down">
+        <div class="col-lg-8 mx-auto text-center">
+            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3 shadow-sm fw-bold border border-success border-opacity-25">Biblioteca Digital do Cidadão</span>
+            <h1 class="display-4 fw-bold text-dark mb-3">Conhecimento que transforma a cidade.</h1>
+            <p class="lead text-muted">
+                Acesse nossos guias rápidos e artigos sobre destinação correta de <strong>resíduos sólidos</strong>, economia circular, posse responsável de pets e <strong>proteção da fauna</strong> local.
+            </p>
+        </div>
+    </div>
+
+    <hr class="mb-5 opacity-10">
+
+    <div class="row g-4 mb-5">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                // Lógica para definir a cor e o ícone do card baseado na Categoria
+                bool isAnimal = item.Categoria != null && (item.Categoria.ToLower().Contains("animal") || item.Categoria.ToLower().Contains("fauna") || item.Categoria.ToLower().Contains("pet"));
+                string corTema = isAnimal ? "primary" : "success";
+                string iconeTema = isAnimal ? "fa-paw" : "fa-leaf";
+                string bgTop = isAnimal ? "bg-primary" : "bg-success";
+
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden card-hover">
+                        
+                        <div class="@bgTop py-4 text-center text-white position-relative">
+                            <i class="fas @iconeTema fa-3x mb-2 shadow-sm"></i>
+                            <div class="position-absolute bottom-0 start-0 w-100" style="height: 10px; background: rgba(255,255,255,0.2);"></div>
+                        </div>
+
+                        <div class="card-body p-4 d-flex flex-column">
+                            <div class="mb-3">
+                                <span class="badge bg-@corTema bg-opacity-10 text-@corTema border border-@corTema border-opacity-25 rounded-pill px-3 py-2">
+                                    <i class="fas fa-tag me-1"></i> @item.Categoria
+                                </span>
+                            </div>
+                            
+                            <h5 class="card-title fw-bold text-dark mb-3">@item.Titulo</h5>
+                            
+                            <p class="card-text text-muted small flex-grow-1">
+                                @(
+                                    string.IsNullOrEmpty(item.TextoCompleto)
+                                        ? "Clique para ler o artigo completo e aprender mais sobre este tema."
+                                        : (item.TextoCompleto.Length > 120 ? item.TextoCompleto.Substring(0, 120) + "..." : item.TextoCompleto)
+                                )
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-white border-0 p-4 pt-0">
+                            <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-@corTema w-100 rounded-pill fw-bold shadow-sm transition-hover">
+                                Ler Artigo Completo <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5" data-aos="fade-in">
+                <i class="fas fa-books fa-4x text-muted opacity-25 mb-3"></i>
+                <h4 class="text-muted fw-bold">A biblioteca está sendo atualizada.</h4>
+                <p class="text-muted">Em breve, novos conteúdos sobre sustentabilidade e proteção animal estarão disponíveis.</p>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+</style>

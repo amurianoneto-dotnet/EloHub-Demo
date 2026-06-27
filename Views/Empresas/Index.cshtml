@@ -1,0 +1,146 @@
+﻿@model EcoCicloPortal.Models.SolicitacaoConsultoria
+
+@{
+    ViewData["Title"] = "Soluções Corporativas (ESG)";
+}
+
+<div class="container my-5">
+    <div class="row align-items-center mb-5" data-aos="fade-right">
+        <div class="col-lg-7">
+            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3 shadow-sm fw-bold border border-success border-opacity-25">ESG & Marketplace B2B</span>
+            <h1 class="display-4 fw-bold text-dark mb-4">Adequação Ambiental e Destinação Correta em um só lugar.</h1>
+            <p class="lead text-muted mb-4">
+                A plataforma conecta a sua empresa a <strong>Centros de Reciclagem e Consultores homologados</strong>. Simplifique a gestão do seu <strong>PGRS</strong>, garanta a emissão de <strong>MTR</strong> e patrocine causas socioambientais na sua cidade.
+            </p>
+            <a href="#contato-b2b" class="btn btn-success btn-lg px-5 py-3 rounded-pill shadow-sm transition-hover">Encontrar Parceiros Homologados</a>
+        </div>
+        <div class="col-lg-5 text-center mt-5 mt-lg-0" data-aos="zoom-in">
+            <div class="position-relative d-inline-block">
+                <div class="bg-white p-5 rounded-circle shadow-lg border border-success border-opacity-50 border-5">
+                    <i class="fas fa-industry fa-8x text-success opacity-75"></i>
+                </div>
+                <div class="position-absolute bottom-0 end-0 bg-primary rounded-circle shadow-lg p-3 border border-white border-4" style="transform: translate(20%, 20%);">
+                    <i class="fas fa-paw fa-3x text-white"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5 opacity-10">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold text-dark">A maior rede de regularização ambiental da região</h2>
+        <p class="text-muted">Conectamos geradores de resíduos aos melhores profissionais e centros de triagem.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center card-hover">
+                <i class="fas fa-users-cog fa-3x text-success mb-3"></i>
+                <h4 class="fw-bold">Conexão com Especialistas</h4>
+                <p class="text-muted small">Encontre consultores ambientais parceiros da plataforma para elaborar seu PGRS com total segurança jurídica e técnica.</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 border-0 shadow-lg p-4 text-center border-top border-success border-4 card-hover" style="transform: scale(1.05);">
+                <i class="fas fa-recycle fa-3x text-success mb-3"></i>
+                <h4 class="fw-bold">Centros de Reciclagem</h4>
+                <p class="text-muted small">Encaminhe seus resíduos para cooperativas e centros de triagem assinantes, garantindo a emissão correta do MTR e Certificado de Destinação (CDF).</p>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center card-hover">
+                <i class="fas fa-hand-holding-heart fa-3x text-primary mb-3"></i>
+                <h4 class="fw-bold">Selo Empresa Cidadã</h4>
+                <p class="text-muted small">Sua empresa pode patrocinar o saldo de Cashback de usuários que salvam animais, melhorando a imagem da marca e fortalecendo seu ESG.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contato-b2b" class="bg-light p-5 rounded-4 shadow-sm border-start border-success border-5 mt-5" data-aos="fade-up">
+        <div class="row">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <h3 class="fw-bold text-dark mb-3"><i class="fas fa-clipboard-check text-success me-2"></i>Encontre a Solução Ideal</h3>
+                <p class="text-muted">
+                    Preencha os dados ao lado. Nossa plataforma irá conectar o seu CNPJ com os centros de reciclagem ou consultores mais bem avaliados para a sua necessidade.
+                </p>
+                <div class="alert alert-info border-0 border-start border-info border-4 mt-4 shadow-sm">
+                    <i class="fas fa-info-circle me-2"></i><strong>Centros de Reciclagem:</strong> Deseja fazer parte da nossa rede de parceiros homologados e receber novos clientes? Selecione a opção "Quero ser um Parceiro" no formulário.
+                </div>
+            </div>
+            
+            <div class="col-lg-7">
+                @if (TempData["MensagemSucesso"] != null)
+                {
+                    <div class="alert alert-success text-center mb-4 shadow-sm fw-bold rounded-pill">
+                        <i class="fas fa-check-circle me-2"></i>@TempData["MensagemSucesso"]
+                    </div>
+                }
+
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <form asp-controller="Home" asp-action="EnviarContato" method="post">
+                            <input type="hidden" name="Perfil" value="Empresa" />
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Nome da Empresa</label>
+                                <input type="text" name="Instituicao" class="form-control form-control-lg bg-light border-0" placeholder="Razão Social ou Nome Fantasia" required />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">Nome do Contato</label>
+                                    <input type="text" name="Nome" class="form-control form-control-lg bg-light border-0" placeholder="Seu nome" required />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">O que você precisa?</label>
+                                    <select name="Mensagem" class="form-select form-select-lg bg-light border-0" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="Preciso de um PGRS">Preciso de um Consultor (PGRS)</option>
+                                        <option value="Preciso descartar resíduos (MTR)">Destinação de Resíduos / MTR</option>
+                                        <option value="Quero patrocinar o Cashback">Patrocinar Causas Animais / Cashback</option>
+                                        <option value="Quero SER UM PARCEIRO">Quero cadastrar meu Centro de Reciclagem</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">E-mail Corporativo</label>
+                                    <input type="email" name="Email" class="form-control form-control-lg bg-light border-0" placeholder="contato@empresa.com" required />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">Telefone / WhatsApp</label>
+                                    <input type="text" name="Telefone" class="form-control form-control-lg bg-light border-0" placeholder="(00) 00000-0000" />
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm fw-bold transition-hover mt-2">
+                                Enviar Solicitação na Rede
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+    }
+</style>

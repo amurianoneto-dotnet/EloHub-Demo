@@ -1,0 +1,194 @@
+﻿@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+<div class="container-fluid bg-success text-white py-5 mb-5 shadow" style="background: linear-gradient(135deg, #198754 0%, #146c43 100%); position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -50px; right: -50px; opacity: 0.1;">
+        <i class="fas fa-leaf fa-10x"></i>
+    </div>
+    
+    <div class="container py-5" data-aos="fade-up">
+        <div class="row align-items-center justify-content-between">
+            
+            <div class="col-lg-6 z-index-2 mb-5 mb-lg-0">
+                <span class="badge bg-white text-success mb-3 px-3 py-2 rounded-pill shadow-sm fs-6 text-uppercase tracking-wide">
+                    <i class="fas fa-city me-1"></i> Hub de Inteligência Urbana
+                </span>
+                
+                <h1 class="display-3 fw-bold mb-4 lh-sm">Cuidar da cidade nunca valeu tanto a pena.</h1>
+                <p class="lead mb-4 opacity-75 fw-light">
+                    A primeira plataforma unificada de zeladoria e proteção animal. Denuncie descartes irregulares, acione resgates para a fauna e ganhe <strong>Cashback Ambiental</strong>.
+                </p>
+                
+                <div class="d-inline-flex align-items-center bg-white text-dark rounded-pill px-4 py-2 mb-4 shadow-sm border border-2 border-light transition-hover cursor-pointer" title="Seu saldo disponível para uso no comércio local">
+                    <div class="bg-success rounded-circle text-white d-flex align-items-center justify-content-center me-3 shadow-inner" style="width: 40px; height: 40px;">
+                        <i class="fas fa-wallet fs-5"></i>
+                    </div>
+                    <div>
+                        <small class="d-block text-muted text-uppercase fw-bold" style="font-size: 0.65rem; letter-spacing: 1px;">Sua Carteira ELO</small>
+                        <span class="fs-5 fw-black text-success" style="font-weight: 900;">
+                            @(ViewBag.SaldoCashback != null ? ((decimal)ViewBag.SaldoCashback).ToString("C2") : "R$ 0,00")
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="200">
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <a href="/Ocorrencias/Registrar?categoria=Residuos" class="card h-100 border-0 shadow-lg text-decoration-none transition-hover" style="border-radius: 1rem;">
+                            <div class="card-body text-center p-4">
+                                <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                    <i class="fas fa-recycle fa-2x text-success"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark mb-1">Zeladoria</h5>
+                                <p class="text-muted small mb-0">Reportar Resíduos ou Mato Alto</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <a href="/Ocorrencias/Registrar?categoria=ProtecaoAnimal" class="card h-100 border-0 shadow-lg text-decoration-none transition-hover" style="border-radius: 1rem;">
+                            <div class="card-body text-center p-4">
+                                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                    <i class="fas fa-paw fa-2x text-primary"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark mb-1">Voz Animal</h5>
+                                <p class="text-muted small mb-0">Maus-tratos ou Resgate</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container my-5 py-5 border-top border-bottom border-light">
+    <div class="row align-items-center g-5">
+        <div class="col-lg-6" data-aos="fade-right">
+            <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill fs-6"><i class="fas fa-gift me-1"></i> Clube de Recompensas</span>
+            <h2 class="display-6 fw-bold text-dark mb-4">Como funciona o Cashback Ambiental?</h2>
+            <p class="text-muted lead mb-4">Seu engajamento gera créditos reais. Entenda o ciclo inteligente que movimenta a nossa economia:</p>
+            
+            <ul class="list-unstyled mb-5">
+                <li class="d-flex mb-3">
+                    <i class="fas fa-camera text-success fs-4 me-3 mt-1"></i>
+                    <div>
+                        <strong class="text-dark d-block">1. Você Relata</strong>
+                        <span class="text-muted small">Faça denúncias válidas pelo app (limite diário para evitar fraudes).</span>
+                    </div>
+                </li>
+                <li class="d-flex mb-3">
+                    <i class="fas fa-check-circle text-primary fs-4 me-3 mt-1"></i>
+                    <div>
+                        <strong class="text-dark d-block">2. Prefeitura Valida</strong>
+                        <span class="text-muted small">O órgão responsável ou a ONG verifica e resolve a situação informada.</span>
+                    </div>
+                </li>
+                <li class="d-flex">
+                    <i class="fas fa-shopping-bag text-warning fs-4 me-3 mt-1"></i>
+                    <div>
+                        <strong class="text-dark d-block">3. Você Resgata</strong>
+                        <span class="text-muted small">O saldo cai na sua carteira ELO para gastar no comércio local parceiro.</span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="bg-light p-4 rounded-4 border-start border-5 border-dark shadow-sm">
+                <h5 class="fw-bold text-dark"><i class="fas fa-store-alt me-2 text-dark"></i>Quer que seu negócio faça parte?</h5>
+                <p class="small text-muted mb-3">Seja um parceiro oficial do ELO. Atraia novos clientes oferecendo vantagens em troca do saldo ambiental e impulsione o selo ESG da sua marca.</p>
+                <a asp-controller="Parceiros" asp-action="SejaParceiro" class="btn btn-outline-dark rounded-pill shadow-sm fw-bold px-4">Cadastrar minha Empresa</a>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 text-center" data-aos="fade-left">
+            <div class="position-relative d-inline-block">
+                <div class="bg-success bg-opacity-10 rounded-circle position-absolute" style="width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;"></div>
+                <i class="fas fa-mobile-alt text-dark position-relative shadow-lg rounded-4 bg-white" style="font-size: 15rem; padding: 2rem; z-index: 1; border: 8px solid #333;"></i>
+                <div class="position-absolute bg-white shadow-lg rounded-pill px-4 py-3" style="bottom: 10%; right: -20%; z-index: 2; animation: float 3s ease-in-out infinite;">
+                    <i class="fas fa-coins text-warning fs-4 me-2"></i><span class="fw-bold fs-5">+ R$ 1,00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="solucoes" class="container my-5 pt-4">
+    <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="display-6 fw-bold text-dark">Uma plataforma, <span class="text-success">três frentes de atuação</span>.</h2>
+        <p class="text-muted lead">Integração total entre zeladoria urbana, proteção da fauna e fomento comercial.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden card-hover">
+                <div class="bg-light p-4 text-center border-bottom border-success border-4">
+                    <h2 class="mb-2"><i class="fas fa-user-shield text-success fa-2x"></i></h2>
+                </div>
+                <div class="card-body p-4 text-center d-flex flex-column">
+                    <h4 class="fw-bold">Para o Cidadão</h4>
+                    <p class="text-muted flex-grow-1">Um hub inteligente para cuidar do seu bairro. Denuncie descartes irregulares e acione resgates, acumulando saldo na sua carteira digital para gastar na cidade.</p>
+                    <a href="#topo" class="btn btn-success rounded-pill mt-3 shadow-sm fw-bold">Faça sua parte</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden card-hover">
+                <div class="bg-dark p-4 text-center border-bottom border-success border-4">
+                    <i class="fas fa-industry fa-2x text-white mb-2 mt-2"></i>
+                </div>
+                <div class="card-body p-4 text-center d-flex flex-column">
+                    <h4 class="fw-bold">Para Empresas</h4>
+                    <p class="text-muted flex-grow-1">Transforme seu resíduo em impacto positivo. Receba consultoria para adequação de resíduos e conecte sua marca ao Clube de Recompensas para atrair clientes.</p>
+                    <a asp-controller="Empresas" asp-action="Index" class="btn btn-dark rounded-pill mt-3 shadow-sm fw-bold">Regularize seu Negócio</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden card-hover">
+                <div class="bg-primary p-4 text-center border-bottom border-success border-4">
+                    <i class="fas fa-landmark fa-2x text-white mb-2 mt-2"></i>
+                </div>
+                <div class="card-body p-4 text-center d-flex flex-column">
+                    <h4 class="fw-bold">Para Prefeituras</h4>
+                    <p class="text-muted flex-grow-1">Otimize a gestão pública com mapas de calor. Acompanhe a zeladoria e integre as demandas de Zoonoses, elevando a nota da cidade no Município VerdeAzul.</p>
+                    <a asp-controller="Home" asp-action="Prefeituras" class="btn btn-primary rounded-pill mt-3 shadow-sm fw-bold">Gestão Pública</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<span id="topo"></span>
+
+<style>
+    .transition-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+    .fw-black {
+        font-weight: 900 !important;
+    }
+    /* Animação para a badge flutuante */
+    @@keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+    }
+</style>

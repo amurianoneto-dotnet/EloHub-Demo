@@ -1,0 +1,53 @@
+﻿@model EcoCicloPortal.Models.ConteudoEducativo
+
+@{
+    ViewData["Title"] = "Publicar Novo Artigo";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4 border-top border-dark border-5">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <span class="badge bg-danger rounded-pill px-3 py-2 mb-2"><i class="fas fa-crown me-1"></i> Acesso SuperAdmin</span>
+                        <h2 class="fw-bold text-dark"><i class="fas fa-edit text-primary me-2"></i> Redação da Plataforma</h2>
+                        <p class="text-muted">Publique novos conteúdos educativos para a população.</p>
+                    </div>
+
+                    <form asp-action="NovaMateria" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Titulo" class="form-label fw-bold text-uppercase small text-muted">Título do Artigo</label>
+                            <input asp-for="Titulo" class="form-control form-control-lg bg-light border-0" placeholder="Ex: Como descartar óleo de cozinha" required />
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Categoria" class="form-label fw-bold text-uppercase small text-muted">Categoria do Assunto</label>
+                            <select asp-for="Categoria" class="form-select form-select-lg bg-light border-0" required>
+                                <option value="">Selecione...</option>
+                                <option value="Resíduos Sólidos">Resíduos Sólidos / Reciclagem (Ficará Verde)</option>
+                                <option value="Proteção Animal">Proteção Animal / Pets (Ficará Azul)</option>
+                                <option value="Sustentabilidade">Sustentabilidade / ESG</option>
+                                <option value="Legislação">Legislação / Leis Municipais</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-5">
+                            <label asp-for="TextoCompleto" class="form-label fw-bold text-uppercase small text-muted">Corpo da Matéria</label>
+                            <textarea asp-for="TextoCompleto" class="form-control bg-light border-0" rows="8" placeholder="Digite o conteúdo do artigo aqui..." required></textarea>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-dark btn-lg w-100 rounded-pill shadow-sm fw-bold">
+                                <i class="fas fa-paper-plane me-2"></i> Publicar Artigo
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4 fw-bold">Voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

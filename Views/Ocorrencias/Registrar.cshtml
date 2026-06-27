@@ -1,0 +1,184 @@
+﻿@model EcoCicloPortal.Models.Ocorrencia
+
+@{
+    // Lógica para saber qual aba está ativa (por padrão, se vier vazio, abre a de Resíduos)
+    string categoriaParam = Context.Request.Query["categoria"].ToString();
+    bool isAnimal = categoriaParam == "ProtecaoAnimal";
+
+    ViewData["Title"] = isAnimal ? "Voz Animal - Nova Denúncia" : "EcoCiclo - Nova Denúncia";
+    
+    string corTema = isAnimal ? "primary" : "success";
+    string iconeTema = isAnimal ? "🐾" : "🌿";
+    string tituloPagina = isAnimal ? "Registrar Maus-tratos ou Resgate" : "Registrar Descarte de Resíduos ou Mato Alto";
+}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="text-center mb-4" data-aos="fade-down">
+                <h5 class="fw-bold text-muted mb-3">O que você precisa relatar hoje?</h5>
+                <div class="btn-group shadow-sm" role="group">
+                    <a href="/Ocorrencias/Registrar?categoria=Residuos" 
+                       class="btn btn-lg @(!isAnimal ? "btn-success" : "btn-light text-muted border") fw-bold px-4 transition-hover" 
+                       style="border-radius: 2rem 0 0 2rem;">
+                        <i class="fas fa-recycle me-2"></i> Resíduos Sólidos
+                    </a>
+                    
+                    <a href="/Ocorrencias/Registrar?categoria=ProtecaoAnimal" 
+                       class="btn btn-lg @(isAnimal ? "btn-primary" : "btn-light text-muted border") fw-bold px-4 transition-hover" 
+                       style="border-radius: 0 2rem 2rem 0;">
+                        <i class="fas fa-paw me-2"></i> Voz Animal
+                    </a>
+                </div>
+            </div>
+
+            <div class="card shadow-lg border-0 rounded-4 border-top border-@corTema border-5" data-aos="fade-up">
+                <div class="card-body p-5">
+                    <h2 class="fw-bold text-@corTema text-center mb-4">
+                        @iconeTema @tituloPagina
+                    </h2>
+                    
+                    <div class="alert alert-warning text-center mb-4 rounded-pill border-warning shadow-sm">
+                        💰 <strong>Cashback Ambiental:</strong> Complete o registro com a localização exata e ganhe saldo!
+                    </div>
+
+                    <form asp-action="Registrar" method="post" enctype="multipart/form-data">
+                        
+                        @if (ViewBag.Erro != null)
+                        {
+                            <div class="alert alert-danger rounded-pill text-center shadow-sm fw-bold mb-4">
+                                <i class="fas fa-shield-alt me-2"></i> @ViewBag.Erro
+                            </div>
+                        }
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <input type="hidden" name="Categoria" value="@(isAnimal ? "ProtecaoAnimal" : "Residuos")" />
+                        <input type="hidden" id="latInput" asp-for="Latitude" />
+                        <input type="hidden" id="longInput" asp-for="Longitude" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Titulo" class="form-label fw-bold"></label>
+                            <input asp-for="Titulo" class="form-control form-control-lg" placeholder="@(isAnimal ? "Ex: Cachorro abandonado na praça central" : "Ex: Sofá e entulho descartados na esquina")" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Descricao" class="form-label fw-bold">Descrição Detalhada</label>
+                            <textarea asp-for="Descricao" class="form-control" rows="3" placeholder="Descreva a situação para ajudar as equipes de campo..." required></textarea>
+                        </div>
+
+                        @if (!isAnimal)
+                        {
+                            <div class="form-group mb-3">
+                                <label asp-for="TipoResiduo" class="form-label fw-bold">Qual é o tipo de problema?</label>
+                                <select asp-for="TipoResiduo" class="form-select form-select-lg" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="Entulho">Entulho / Resto de Obra</option>
+                                    <option value="Movel">Móveis / Eletrônicos</option>
+                                    <option value="MatoAlto">Mato Alto / Falta de Roçamento</option>
+                                    <option value="Organico">Resíduo Orgânico Acumulado</option> 
+                                </select>
+                            </div>
+                        }
+
+                        <div class="form-group mb-3">
+                            <label class="form-label fw-bold">Localização da Ocorrência (GPS)</label>
+                            <div id="map" class="rounded-4 shadow-sm mb-2" style="height: 250px; border: 2px solid #dee2e6;"></div>
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill mb-2 fw-bold" onclick="getLocation()">
+                                <i class="fas fa-location-crosshairs text-danger"></i> Capturar Minha Localização Atual
+                            </button>
+                            
+                            <label asp-for="Localizacao" class="form-label fw-bold mt-2">Endereço Identificado</label>
+                            <input asp-for="Localizacao" id="enderecoInput" class="form-control" placeholder="Buscando endereço pelo GPS..." required />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-group mb-4">
+                                <label asp-for="Cidade" class="form-label fw-bold"></label>
+                                <input asp-for="Cidade" id="cidadeInput" class="form-control bg-light" value="Barra Bonita" readonly required />
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4" data-aos="fade-up">
+                            <label class="form-label fw-bold text-dark">
+                                <i class="fas fa-camera text-@corTema me-1"></i> Evidência (Foto ou Vídeo)
+                            </label>
+                            
+                            <input type="file" name="arquivoMidia" id="arquivoMidia" class="form-control form-control-lg border-@corTema shadow-sm" accept="image/*,video/*" required />
+                            
+                            <small class="text-muted mt-2 d-block">
+                                <i class="fas fa-info-circle"></i> A mídia anexada é obrigatória para a validação da ocorrência e liberação do seu Cashback.
+                            </small>
+                        </div>
+
+                        <button type="submit" class="btn btn-@corTema btn-lg w-100 rounded-pill fw-bold shadow-sm transition-hover">
+                            <i class="fas fa-paper-plane me-2"></i> Enviar e Gerar Cashback
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+</style>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([-22.5111, -48.5581], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marker;
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocalização não é suportada por este navegador.");
+        }
+    }
+
+    function showPosition(position) {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+
+        document.getElementById("latInput").value = lat;
+        document.getElementById("longInput").value = lon;
+
+        if (marker) map.removeLayer(marker);
+        marker = L.marker([lat, lon]).addTo(map);
+        map.setView([lat, lon], 17);
+
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+            .then(response => response.json())
+            .then(data => {
+                var endereco = data.address.road || "";
+                var numero = data.address.house_number || "S/N";
+                var bairro = data.address.suburb || "";
+                var cidade = data.address.city || data.address.town || "Barra Bonita";
+
+                document.getElementById("enderecoInput").value = `${endereco}, ${numero} - ${bairro}`;
+                document.getElementById("cidadeInput").value = cidade;
+            })
+            .catch(err => console.log("Erro ao buscar endereço: ", err));
+    }
+
+    function showError(error) {
+        alert("Para garantir a precisão da denúncia e o ganho de cashback, precisamos da sua localização via GPS. Por favor, autorize no seu navegador.");
+    }
+
+    window.onload = getLocation;
+</script>

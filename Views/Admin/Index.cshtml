@@ -1,0 +1,250 @@
+﻿@model IEnumerable<EcoCicloPortal.Models.Prefeitura>
+
+@{
+    ViewData["Title"] = "Torre de Comando - ELO SaaS";
+    // Pegando a lista de denúncias que veio lá do Controller
+    var ultimasOcorrencias = ViewBag.UltimasOcorrencias as IEnumerable<EcoCicloPortal.Models.Ocorrencia>;
+}
+
+<div class="container-fluid mt-4 px-4 pb-5" style="background-color: #f8f9fa; min-height: 80vh;">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <span class="badge bg-danger rounded-pill px-3 py-2 mb-2 shadow-sm"><i class="fas fa-crown me-1"></i> Acesso Super Admin</span>
+            <h2 class="fw-black text-dark mb-0">Visão Global da Plataforma</h2>
+        </div>
+        <div>
+            <a asp-action="NovaPrefeitura" class="btn btn-success rounded-pill shadow-sm fw-bold transition-hover me-2">
+                <i class="fas fa-city me-1"></i> Adicionar Município
+            </a>
+            <a asp-action="NovaMateria" class="btn btn-primary rounded-pill shadow-sm fw-bold transition-hover">
+                <i class="fas fa-book-open me-1"></i> Publicar Matéria
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success shadow-sm rounded-pill fw-bold text-center mb-4 border-0">
+            <i class="fas fa-check-circle me-2"></i> @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    <h5 class="fw-bold text-muted text-uppercase mb-3" style="letter-spacing: 1px;"><i class="fas fa-chart-line me-2"></i> Indicadores Financeiros (B2G)</h5>
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 border-start border-success border-5 h-100 card-hover bg-white">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-bold text-muted opacity-75 small">MRR (Faturamento)</h6>
+                        <h3 class="fw-black text-success mb-0">@(ViewBag.MRR != null ? ((decimal)ViewBag.MRR).ToString("C2") : "R$ 0,00")</h3>
+                    </div>
+                    <i class="fas fa-money-bill-wave fa-2x text-success opacity-25"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 border-start border-primary border-5 h-100 card-hover bg-white">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-bold text-muted opacity-75 small">Prefeituras Ativas</h6>
+                        <h3 class="fw-black text-primary mb-0">@ViewBag.TotalPrefeituras</h3>
+                    </div>
+                    <i class="fas fa-landmark fa-2x text-primary opacity-25"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 border-start border-warning border-5 h-100 card-hover bg-white">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-bold text-muted opacity-75 small">Órgãos Cadastrados</h6>
+                        <h3 class="fw-black text-warning mb-0">@ViewBag.TotalOrgaos</h3>
+                    </div>
+                    <i class="fas fa-building fa-2x text-warning opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 border-start border-dark border-5 h-100 card-hover bg-white">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-bold text-muted opacity-75 small">Economia Circular</h6>
+                        <h3 class="fw-black text-dark mb-0">R$ @(ViewBag.TotalCashback?.ToString("F2") ?? "0,00")</h3>
+                    </div>
+                    <i class="fas fa-coins fa-2x text-dark opacity-25"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="fw-bold text-muted text-uppercase mb-3" style="letter-spacing: 1px;"><i class="fas fa-globe-americas me-2"></i> Impacto Cidadão</h5>
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 bg-primary text-white h-100 card-hover">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-bold opacity-75 small">Usuários Engajados</h6>
+                        <h2 class="fw-bold mb-0">@ViewBag.TotalUsuarios</h2>
+                    </div>
+                    <i class="fas fa-users fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 bg-success text-white h-100 card-hover">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-bold opacity-75 small">Resíduos Mapeados</h6>
+                        <h2 class="fw-bold mb-0">@(ViewBag.TotalOcorrencias - ViewBag.AnimaisSalvos)</h2>
+                    </div>
+                    <i class="fas fa-recycle fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 bg-info text-white h-100 card-hover">
+                <div class="card-body p-4 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-bold opacity-75 small">Animais Auxiliados</h6>
+                        <h2 class="fw-bold mb-0">@ViewBag.AnimaisSalvos</h2>
+                    </div>
+                    <i class="fas fa-paw fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-header bg-white border-bottom p-4">
+                    <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-file-signature text-success me-2"></i> Contratos Ativos (SaaS)</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light text-muted small text-uppercase">
+                                <tr>
+                                    <th class="px-4">Município</th>
+                                    <th>Mensalidade</th>
+                                    <th>Acesso</th>
+                                    <th class="text-end px-4">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (!Model.Any())
+                                {
+                                    <tr>
+                                        <td colspan="4" class="text-center py-4 text-muted small">Nenhum município cadastrado.</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var pref in Model)
+                                    {
+                                        <tr>
+                                            <td class="px-4 fw-bold">@pref.Nome</td>
+                                            <td class="text-success fw-bold">@pref.ValorMensalidade.ToString("C2")</td>
+                                            <td>
+                                                @if (pref.Ativo)
+                                                {
+                                                    <span class="badge bg-success">Liberado</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">Bloqueado</span>
+                                                }
+                                            </td>
+                                            <td class="text-end px-4">
+                                                <a asp-action="GerenciarPrefeitura" asp-route-id="@pref.Id" class="btn btn-sm btn-outline-dark rounded-pill shadow-sm">
+                                                    <i class="fas fa-cog me-1"></i> Gerenciar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-header bg-white border-bottom p-4">
+                    <h5 class="fw-bold mb-0 text-dark"><i class="fas fa-stream text-primary me-2"></i> Últimas Denúncias (Tempo Real)</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light text-muted small text-uppercase">
+                                <tr>
+                                    <th class="px-4">Data</th>
+                                    <th>Categoria</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ultimasOcorrencias == null || !ultimasOcorrencias.Any())
+                                {
+                                    <tr>
+                                        <td colspan="3" class="text-center py-4 text-muted small">Nenhuma denúncia registrada ainda.</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    foreach (var oc in ultimasOcorrencias)
+                                    {
+                                        <tr>
+                                            <td class="px-4 text-muted small fw-bold">@oc.DataRegistro.ToString("dd/MM HH:mm")</td>
+                                            <td>
+                                                @if (oc.Categoria == EcoCicloPortal.Models.CategoriaOcorrencia.ProtecaoAnimal)
+                                                {
+                                                    <span class="badge bg-info text-dark"><i class="fas fa-paw"></i> Animal</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-success"><i class="fas fa-recycle"></i> Resíduos</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (oc.Status == "Pendente")
+                                                {
+                                                    <span class="badge bg-warning text-dark">Aguardando</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-dark">@oc.Status</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .fw-black { font-weight: 900 !important; }
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    }
+    .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+</style>

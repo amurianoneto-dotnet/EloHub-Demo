@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Sobre o ELO Hub";
+}
+
+<style>
+    @@keyframes pulsar {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+        100% { transform: scale(1); }
+    }
+    .anim-pulsar {
+        display: inline-block;
+        animation: pulsar 2s infinite ease-in-out;
+    }
+
+    @@keyframes piscar {
+        0%, 90%, 100% { transform: scaleY(1); }
+        95% { transform: scaleY(0.1); }
+    }
+    .anim-piscar {
+        display: inline-block;
+        animation: piscar 4s infinite;
+    }
+
+    @@keyframes aperto {
+        0%, 100% { transform: scale(1); }
+        50% { transform: translateX(8px); }
+    }
+    .anim-aperto {
+        display: inline-block;
+        animation: aperto 1.5s infinite ease-in-out;
+    }
+
+    /* Animação para o grupo flutuar suavemente */
+    @@keyframes flutuar {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+    .anim-flutuar {
+        display: inline-block;
+        animation: flutuar 3.5s ease-in-out infinite;
+    }
+
+    .card-institucional {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        background-color: #f8f9fa;
+    }
+    .card-institucional:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row align-items-center mb-5" data-aos="fade-up">
+        <div class="col-lg-7">
+            <span class="badge bg-dark bg-opacity-10 text-dark mb-3 px-3 py-2 rounded-pill fs-6 fw-bold border border-secondary border-opacity-25">A Força da Integração</span>
+            <h1 class="display-4 fw-bold text-dark mb-4">Tecnologia a serviço do <span class="text-success">Meio Ambiente</span> e da <span class="text-primary">Vida Animal</span>.</h1>
+            <p class="lead text-muted">
+                O <strong>ELO - Hub de Inteligência Urbana</strong> nasceu da necessidade de unificar a zeladoria ambiental e a proteção da fauna em uma única plataforma poderosa e inteligente.
+            </p>
+            <p class="text-muted">
+                Nós somos o "elo" de ligação: conectamos cidadãos engajados, empresas responsáveis e o poder público em um ecossistema sustentável, colaborativo e movido a dados.
+            </p>
+        </div>
+        
+        <div class="col-lg-5 text-center">
+            <div class="anim-flutuar position-relative d-inline-block mt-5">
+                <i class="fas fa-leaf text-success opacity-75" style="font-size: 9rem; transform: rotate(-15deg); position: relative; z-index: 1;"></i>
+                <i class="fas fa-paw text-primary opacity-75" style="font-size: 6rem; position: absolute; bottom: -5%; right: -15%; z-index: 2; text-shadow: -5px -5px 0 #f8f9fa;"></i>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5 opacity-10" />
+
+    <div class="row text-center g-4 mb-5">
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="p-4 shadow-sm rounded-4 h-100 card-institucional">
+                <div class="anim-pulsar">
+                    <i class="fas fa-bullseye fa-4x text-success mb-3"></i>
+                </div>
+                <h3 class="fw-bold mt-2">Missão</h3>
+                <p class="text-muted">Digitalizar o monitoramento urbano para erradicar o descarte irregular de resíduos, promover a economia circular e garantir o resgate ágil de animais em situação de risco.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="p-4 shadow-sm rounded-4 h-100 card-institucional border-bottom border-dark border-3">
+                <div class="anim-piscar">
+                    <i class="fas fa-eye fa-4x text-primary mb-3"></i>
+                </div>
+                <h3 class="fw-bold mt-2">Visão</h3>
+                <p class="text-muted">Ser reconhecida como a maior e mais eficiente plataforma tecnológica B2G de gestão ambiental e bem-estar animal do Brasil.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="p-4 shadow-sm rounded-4 h-100 card-institucional">
+                <div class="anim-aperto">
+                    <i class="fas fa-hands-helping fa-4x text-success mb-3"></i>
+                </div>
+                <h3 class="fw-bold mt-2">Valores</h3>
+                <p class="text-muted">Ética, inovação tecnológica, respeito a todas as formas de vida, transparência radical e compromisso com o futuro das nossas cidades.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5" data-aos="fade-up">
+        <div class="col-md-4">
+            <div class="bg-success text-white p-4 rounded-4 shadow-sm h-100 d-flex flex-column transition-hover">
+                <h4 class="fw-bold"><i class="fas fa-user me-2"></i>Para o Cidadão</h4>
+                <p class="mb-4 small">Seja um guardião do seu bairro. Relate descartes irregulares de resíduos ou acione redes de proteção animal de forma rápida e ganhe Cashback.</p>
+                <div class="mt-auto text-center">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-light text-success fw-bold w-100 rounded-pill shadow-sm">Acessar Hub</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="bg-dark text-white p-4 rounded-4 shadow-sm h-100 d-flex flex-column transition-hover">
+                <h4 class="fw-bold text-success"><i class="fas fa-industry me-2"></i>Para Empresas</h4>
+                <p class="mb-4 small">Adequação ambiental (PGRS, MTR) e consultoria especializada. Empresas parceiras do ELO não apenas cumprem a lei ambiental, mas se tornam protagonistas da economia circular através do nosso Clube de Recompensas.</p>
+                <div class="mt-auto text-center">
+                    <a asp-controller="Empresas" asp-action="Index" class="btn btn-outline-success w-100 rounded-pill text-white border-2">Solicitar Diagnóstico</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="bg-primary text-white p-4 rounded-4 shadow-sm h-100 d-flex flex-column transition-hover">
+                <h4 class="fw-bold text-light"><i class="fas fa-landmark me-2"></i>Para Prefeituras</h4>
+                <p class="mb-4 small">Gestão unificada para elevar a nota no <strong>Programa Município VerdeAzul</strong> e otimizar o Controle de Zoonoses com mapas de calor.</p>
+                <div class="mt-auto text-center">
+                    <a asp-controller="Home" asp-action="Prefeituras" class="btn btn-light text-primary fw-bold w-100 rounded-pill shadow-sm">Agendar Demonstração</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

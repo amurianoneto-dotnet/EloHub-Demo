@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Soluções para Prefeituras";
+}
+
+<div class="container my-5">
+    <div class="row align-items-center mb-5" data-aos="fade-right">
+        <div class="col-lg-7">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 shadow-sm fw-bold border border-primary border-opacity-25">Smart City & GovTech</span>
+            <h1 class="display-4 fw-bold text-dark mb-4">A Central de Inteligência Urbana do seu Município.</h1>
+            <p class="lead text-muted mb-4">
+                Digitalize a zeladoria urbana e o controle de zoonoses em uma única plataforma. Engaje cidadãos, gerencie órgãos parceiros e eleve a pontuação da sua cidade no <strong>Programa Município VerdeAzul (PMVA)</strong>.
+            </p>
+            <a href="#contato-gov" class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-sm transition-hover">Agendar Demonstração do Painel</a>
+        </div>
+        <div class="col-lg-5 text-center mt-5 mt-lg-0" data-aos="zoom-in">
+            <div class="position-relative d-inline-block">
+                <div class="bg-white p-5 rounded-circle shadow-lg border border-primary border-opacity-50 border-5">
+                    <i class="fas fa-landmark fa-8x text-primary opacity-75"></i>
+                </div>
+                <div class="position-absolute top-0 start-0 bg-success rounded-circle shadow p-3 border border-white border-3" style="transform: translate(-20%, 20%);">
+                    <i class="fas fa-recycle fa-2x text-white"></i>
+                </div>
+                <div class="position-absolute bottom-0 end-0 bg-info rounded-circle shadow p-3 border border-white border-3" style="transform: translate(20%, -20%);">
+                    <i class="fas fa-paw fa-2x text-white"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5 opacity-10">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="fw-bold text-primary">Por que a sua cidade precisa da nossa plataforma?</h2>
+        <p class="text-muted">Transformamos dados em políticas públicas eficientes e economia para os cofres municipais.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center card-hover border-top border-primary border-4">
+                <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                <h4 class="fw-bold">Ouvidoria 360º Unificada</h4>
+                <p class="text-muted small">Cidadãos relatam descartes irregulares de resíduos sólidos ou acionam resgates de animais com foto e GPS georreferenciado, eliminando trotes e triando as demandas automaticamente.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center card-hover border-top border-info border-4">
+                <i class="fas fa-network-wired fa-3x text-info mb-3"></i>
+                <h4 class="fw-bold">Gestão de Órgãos Parceiros</h4>
+                <p class="text-muted small">A prefeitura gerencia acessos. Crie logins específicos para a Polícia Ambiental ou ONGs assumirem casos de fauna, enquanto a Secretaria de Obras foca na limpeza.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center card-hover border-top border-success border-4">
+                <i class="fas fa-file-pdf fa-3x text-success mb-3"></i>
+                <h4 class="fw-bold">Certificações e PMVA</h4>
+                <p class="text-muted small">Exporte relatórios em PDF com um clique. Forneça as evidências documentais exatas exigidas pelas diretivas estaduais para liberar verbas e fundos ambientais.</p>
+            </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="card h-100 border-0 shadow-lg p-4 text-center bg-primary text-white card-hover" style="transform: scale(1.02);">
+                <i class="fas fa-chart-line fa-3x mb-3 text-light"></i>
+                <h4 class="fw-bold">Mapas de Calor e Economia</h4>
+                <p class="small text-light opacity-75">Visualize manchas criminais ambientais em tempo real. Reduza custos de rondas focando em pontos críticos e estimule o comércio local através do sistema de Cashback.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contato-gov" class="bg-light p-5 rounded-4 shadow-sm border-start border-primary border-5 mt-5" data-aos="zoom-in">
+        <div class="row align-items-center">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <h3 class="fw-bold text-dark mb-3">Dê o primeiro passo para uma cidade mais inteligente.</h3>
+                <p class="text-muted">Preencha os dados e nossa equipe técnica apresentará o modelo de licenciamento SaaS adaptado à realidade e tamanho do seu município.</p>
+            </div>
+            
+            <div class="col-lg-7">
+                @if (TempData["MensagemSucesso"] != null)
+                {
+                    <div class="alert alert-success text-center mb-4 shadow-sm fw-bold rounded-pill">
+                        <i class="fas fa-check-circle me-2"></i>@TempData["MensagemSucesso"]
+                    </div>
+                }
+
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <form asp-controller="Home" asp-action="EnviarContato" method="post">
+                            <input type="hidden" name="Perfil" value="Prefeitura" />
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Órgão Público</label>
+                                <input type="text" name="Instituicao" class="form-control form-control-lg bg-light border-0" placeholder="Ex: Prefeitura Municipal de Barra Bonita" required>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">Responsável</label>
+                                    <input type="text" name="Nome" class="form-control form-control-lg bg-light border-0" placeholder="Nome do Prefeito ou Secretário" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">Secretaria</label>
+                                    <select name="Mensagem" class="form-select form-select-lg bg-light border-0" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="Gabinete do Prefeito">Gabinete do Prefeito</option>
+                                        <option value="Meio Ambiente">Sec. de Meio Ambiente / Obras</option>
+                                        <option value="Zoonoses">Controle de Zoonoses / Saúde</option>
+                                        <option value="Tecnologia">Sec. de Inovação / Tecnologia</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">E-mail Institucional</label>
+                                    <input type="email" name="Email" class="form-control form-control-lg bg-light border-0" placeholder="gabinete@cidade.sp.gov.br" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted text-uppercase">Telefone</label>
+                                    <input type="text" name="Telefone" class="form-control form-control-lg bg-light border-0" placeholder="(00) 0000-0000">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm fw-bold transition-hover">
+                                Solicitar Contato Comercial B2G
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+    }
+</style>

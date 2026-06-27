@@ -1,0 +1,54 @@
+﻿@model EcoCicloPortal.Models.Usuario
+
+@{
+    ViewData["Title"] = "Cadastro de Cidadão";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4 border-top border-primary border-5 mt-4">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold text-primary"><i class="fas fa-user-plus me-2"></i>Criar Conta</h2>
+                        <p class="text-muted">Junte-se à plataforma, ajude a cidade e ganhe <strong>Cashback Ambiental</strong>!</p>
+                    </div>
+
+                    @if (ViewBag.Erro != null)
+                    {
+                        <div class="alert alert-danger rounded-pill text-center shadow-sm">
+                            <i class="fas fa-exclamation-circle me-1"></i> @ViewBag.Erro
+                        </div>
+                    }
+                    <div asp-validation-summary="All" class="text-danger fw-bold text-center mb-3"></div>
+                    <form asp-controller="Login" asp-action="Cadastro" method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="Nome" class="form-label fw-bold">Nome Completo</label>
+                            <input asp-for="Nome" class="form-control form-control-lg" placeholder="Como devemos te chamar?" required />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="form-label fw-bold">E-mail</label>
+                            <input asp-for="Email" type="email" class="form-control form-control-lg" placeholder="seu@email.com" required />
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Senha" class="form-label fw-bold">Senha</label>
+                            <input asp-for="Senha" type="password" class="form-control form-control-lg" placeholder="Crie uma senha segura" required />
+                            <small class="text-muted text-center d-block mt-2"><i class="fas fa-shield-alt"></i> Seus dados estão seguros conosco.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-sm mb-3">
+                            Criar Conta e Começar a Ganhar
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="text-muted">Já faz parte do projeto?</p>
+                        <a href="/Login/Index" class="btn btn-outline-primary rounded-pill px-4">Fazer Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Seja um Parceiro ELO";
+}
+
+<div class="container my-5">
+    <div class="row border-0 shadow-lg rounded-4 overflow-hidden bg-white" data-aos="zoom-in">
+        
+        <div class="col-lg-5 p-5 text-white d-flex flex-column justify-content-center position-relative" style="background: linear-gradient(135deg, #212529 0%, #000000 100%);">
+            
+            <div class="position-absolute top-0 end-0 opacity-10 p-4 d-none d-md-block">
+                <i class="fas fa-handshake fa-10x"></i>
+            </div>
+            
+            <div class="z-index-2">
+                <span class="badge bg-success text-white rounded-pill px-3 py-2 mb-4 fs-6">
+                    <i class="fas fa-rocket me-1"></i> B2B ELO Hub
+                </span>
+                <h2 class="display-6 fw-bold mb-4">Traga clientes, gere impacto.</h2>
+                <p class="lead opacity-75 mb-4 fs-6">
+                    Faça parte do ecossistema que está transformando a cidade. Ofereça vantagens exclusivas para cidadãos engajados e associe sua marca às práticas <strong>ESG (Ambiental, Social e Governança)</strong>.
+                </p>
+                
+                <ul class="list-unstyled mt-2">
+                    <li class="mb-3 d-flex align-items-center">
+                        <i class="fas fa-check-circle text-success fs-5 me-3"></i>
+                        <span>Aumento no fluxo de clientes locais.</span>
+                    </li>
+                    <li class="mb-3 d-flex align-items-center">
+                        <i class="fas fa-check-circle text-success fs-5 me-3"></i>
+                        <span>Selo Empresa Cidadã na plataforma.</span>
+                    </li>
+                    <li class="mb-3 d-flex align-items-center">
+                        <i class="fas fa-check-circle text-success fs-5 me-3"></i>
+                        <span>Custo zero de adesão. Pague apenas a taxa de manutenção ELO.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-7 p-5">
+            <h3 class="fw-bold text-dark mb-2">Formulário de Credenciamento</h3>
+            <p class="text-muted small mb-5">Preencha os dados abaixo para homologar seu estabelecimento no Clube de Recompensas.</p>
+
+            <form asp-action="SejaParceiro" method="post">
+                <div class="row g-4">
+                    
+                    <div class="col-md-7">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Nome da Empresa (Fantasia)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-store text-muted"></i></span>
+                            <input type="text" name="nomeLoja" class="form-control bg-light border-start-0" placeholder="Ex: Padaria do Bairro" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="form-label fw-bold text-muted small text-uppercase">CNPJ</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-id-card text-muted"></i></span>
+                            <input type="text" name="cnpj" class="form-control bg-light border-start-0" placeholder="00.000.000/0001-00" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-4">
+                        <label class="form-label fw-bold text-muted small text-uppercase">O que você vai oferecer?</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-gift text-muted"></i></span>
+                            <input type="text" name="oferta" class="form-control bg-light border-start-0" placeholder="Ex: Voucher de R$ 15 OFF em compras acima de R$ 50" required>
+                        </div>
+                        <div class="form-text mt-2">Seja criativo! Pode ser um desconto, um brinde ou um serviço exclusivo (Ex: 1 Tosa Grátis).</div>
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+                        <label class="form-label fw-bold text-success small text-uppercase">Custo em Cashback (R$)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-success text-white border-0">R$</span>
+                            <input type="number" step="0.50" min="1.00" name="valorCashback" class="form-control border-success border-2" placeholder="Ex: 5,00" required>
+                        </div>
+                        <div class="form-text">Quanto do saldo o usuário precisa gastar para resgatar sua oferta?</div>
+                    </div>
+
+                    <div class="col-md-12 mt-5">
+                        <button type="submit" class="btn btn-dark w-100 py-3 rounded-pill fw-bold shadow-sm transition-hover">
+                            Enviar Solicitação de Parceria <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                        <div class="text-center mt-3">
+                            <a asp-controller="Parceiros" asp-action="Index" class="text-decoration-none text-muted small hover-success">Voltar para o Clube de Recompensas</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+    .hover-success:hover {
+        color: #198754 !important;
+    }
+    .form-control, .input-group-text {
+        padding: 0.75rem 1rem;
+    }
+    .form-control:focus {
+        border-color: #198754;
+        box-shadow: none;
+    }
+    .input-group:focus-within .input-group-text {
+        border-color: #198754;
+        color: #198754 !important;
+    }
+</style>
