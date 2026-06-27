@@ -90,4 +90,7 @@ Este repositório serve como um **Portfólio de Arquitetura e UI/UX**. Para prot
 * **O que foi retirado:** Consultas EF Core, algoritmos de cálculo de distribuição de Cashback, chaves de API, arquivos `appsettings.json` reais e Migrations.
 * **O que está disponível:** Todo o Design System, organização estrutural do padrão MVC, Views, Assets (`wwwroot`), e a demonstração da estrutura de Controladores com dados simulados.
 
+### Política de Privacidade e Dados de Teste
+Todos os dados visíveis nas capturas de tela e códigos deste repositório — incluindo **nomes de usuários, e-mails, endereços logradouros, coordenadas de GPS e registros de ocorrências** — são **100% fictícios e simulados**. Eles foram gerados em ambiente controlado exclusivamente para fins de homologação, testes de estresse da interface e apresentação do MVP, sem expor nenhuma informação real ou privada de cidadãos ou instituições.
+
 O objetivo é demonstrar a capacidade de construir interfaces premium e sistemas complexos voltados para impacto social e financeiro.
